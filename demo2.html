@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>封装后的qrcode(可添加logo图)</title>
+</head>
+<body style="text-align: center;">
+<input id="text" type="text" value="http://baidu.com" style="width:200px;height: 30px;line-height: 30px;border-radius: 4px;padding: 0 10px; border: 1px solid #cccccc; color: #68728c;margin-top: 40px;" /><br />
+<div id="qrcode" style="width: 200px;height: 200px; margin: 60px auto;"></div>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jquery.qrcode.js" ></script>
+<script type="text/javascript" src="utf.js" ></script>
+<script>
+    var src = $('#text').val();
+    $('#qrcode').qrcode({
+        render: "canvas",
+        text: src,
+        width: "200",
+        height: "200",
+        background: "#ffffff",
+        foreground: "#000000",
+        src: 'logo.jpg'
+    });
+
+    function makeCode () {
+        src = $('#text').val();
+
+        $('#qrcode').html('').qrcode({
+            render: "canvas",
+            text: src,
+            width: "200",
+            height: "200",
+            background: "#ffffff",
+            foreground: "#000000",
+            src: 'logo.jpg'
+        });
+    }
+
+    $("#text").on("blur", function () {
+        makeCode();
+    }).on("keydown", function (e) {
+        if (e.keyCode == 13) {
+            makeCode();
+        }
+    });
+
+
+</script>
+</body>
+</html>

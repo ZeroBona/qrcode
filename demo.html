@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>原始生成二维码qrcode</title>
+</head>
+<body style="text-align: center;">
+<input id="text" type="text" value="http://baidu.com" style="width:200px;height: 30px;line-height: 30px;border-radius: 4px;padding: 0 10px; border: 1px solid #cccccc; color: #68728c;margin-top: 40px;" /><br />
+<div id="qrcode" style="width: 200px;height: 200px; margin: 60px auto;"></div>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="utf.js"></script>
+<script type="text/javascript" src="qrcode.js"></script>
+<script type="text/javascript">
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+        width : 200,
+        height : 200,
+        colorDark: '#347fff',
+        colorLight: '#ffffff'
+    });
+
+    function makeCode () {
+        var src = $('#text').val();
+
+        //清除二维码
+        //qrcode.clear();
+
+        //生成二维码
+        qrcode.makeCode(src);
+    }
+
+    makeCode();
+
+    $("#text").on("blur", function () {
+        makeCode();
+    }).on("keydown", function (e) {
+        if (e.keyCode == 13) {
+            makeCode();
+        }
+    });
+
+</script>
+</body>
+</html>
